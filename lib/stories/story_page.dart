@@ -9,17 +9,9 @@ class StoryPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 80),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/test.jpg"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            Image.asset('assets/images/test.jpg'),
+            ElevatedButton(onPressed: () {}, child: Text('Add to Cart'))
           ],
         ),
       ),
