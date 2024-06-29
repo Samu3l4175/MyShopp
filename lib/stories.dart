@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class Stories extends StatelessWidget {
   const Stories({super.key});
@@ -7,14 +8,66 @@ class Stories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(color: Colors.white),
-      child: const SafeArea(
+      child: SafeArea(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ImageIcon(
-              AssetImage('assets/images/test.jpg'),
-              size: 500,
-              semanticLabel: 'Prova',
-            ),
+            Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.red,
+                    Colors.yellow,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+            )
+            //         Container(
+            //           decoration: const BoxDecoration(
+            //             shape: BoxShape.circle,
+            //             gradient: LinearGradient(
+            //               colors: [
+            //                 Colors.red,
+            //                 Colors.yellow,
+            //               ],
+            //               begin: Alignment.topLeft,
+            //               end: Alignment.bottomRight,
+            //             ),
+            //           ),
+            //           child: TextButton(
+            //             onPressed: () {},
+            //             child: const Padding(
+            //               padding: EdgeInsets.all(.0),
+            //               child: CircleAvatar(
+            //                 backgroundImage: AssetImage('assets/images/test.jpg'),
+            //                 radius: 30,
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //         Container(
+            //           decoration: const BoxDecoration(
+            //             shape: BoxShape.circle,
+            //             gradient: LinearGradient(
+            //               colors: [
+            //                 Colors.red,
+            //                 Colors.yellow,
+            //               ],
+            //               begin: Alignment.topLeft,
+            //               end: Alignment.bottomRight,
+            //             ),
+            //           ),
+            //           child: const Padding(
+            //             padding: EdgeInsets.all(4.0),
+            //             child: CircleAvatar(
+            //               backgroundImage: AssetImage('assets/images/test.jpg'),
+            //               radius: 30,
+            //             ),
+            //           ),
+            //         )
           ],
         ),
       ),
