@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'package:myshopp/menubar_button.dart';
+import 'package:myshopp/stories/story_page.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -56,7 +59,24 @@ class Home extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              Story(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) {
+                        return StoryPage();
+                      },
+                    ),
+                  );
+                },
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: dummyStories,
+                  ),
+                ),
+              ),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

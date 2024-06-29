@@ -1,74 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:stories_for_flutter/stories_for_flutter.dart';
+import 'package:myshopp/stories/stories.dart';
 
-class Storie extends StatelessWidget {
-  const Story({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stories(
-      circlePadding: 2,
-      storyItemList: [
-        StoryItem(
-            name: "First Story",
-            thumbnail: const AssetImage('assets/images/test.jpg'),
-            stories: [
-              Scaffold(
-                body: Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/images/test.jpg'),
-                    ),
-                  ),
-                ),
-              ),
-              Scaffold(
-                body: Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                        "https://i.pinimg.com/originals/2e/c6/b5/2ec6b5e14fe0cba0cb0aa5d2caeeccc6.jpg",
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ]),
-        StoryItem(
-          name: "2nd",
-          thumbnail: const NetworkImage(
-            "https://www.shareicon.net/data/512x512/2017/03/29/881758_cup_512x512.png",
-          ),
-          stories: [
-            Scaffold(
-              body: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      "https://i.pinimg.com/originals/31/bc/a9/31bca95ba39157a6cbf53cdf09dda672.png",
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const Scaffold(
-              backgroundColor: Colors.black,
-              body: Center(
-                child: Text(
-                  "That's it, Folks !",
-                  style: TextStyle(
-                    color: Color(0xffffffff),
-                    fontSize: 25,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
+List<Widget> dummyStories = [
+  const SizedBox(width: 15),
+  const Stories(
+    name: 'Abdul',
+    imageURL: 'assets/images/test.jpg',
+  ),
+  const SizedBox(width: 15),
+  const Stories(
+    name: 'Abdul',
+    imageURL: 'assets/images/test.jpg',
+  ),
+  const SizedBox(width: 15),
+  const Stories(
+    name: 'Abdul',
+    imageURL: 'assets/images/test.jpg',
+  ),
+  const SizedBox(width: 15),
+  const Stories(
+    name: 'Abdul',
+    imageURL: 'assets/images/test.jpg',
+  ),
+  const SizedBox(width: 15),
+  const Stories(
+    name: 'Abdul',
+    imageURL: 'assets/images/test.jpg',
+  ),
+];
