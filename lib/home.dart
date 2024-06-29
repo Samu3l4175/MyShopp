@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myshopp/stories/list_stories.dart';
+import 'package:myshopp/menubar_button.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -55,38 +56,17 @@ class Home extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              Scrollbar(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Scrollbar(
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: dummyStories,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              Story(),
+              SizedBox(height: 10),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                      ),
-                    ),
-                    child: const Text('Live'),
-                  )
+                  MenuButton(function: () {}, text: 'Live'),
+                  MenuButton(function: () {}, text: 'Reels'),
+                  MenuButton(function: () {}, text: 'MarketPlace'),
+                  MenuButton(function: () {}, text: 'Cupon'),
                 ],
-              )
+              ),
             ],
           ),
         ),
