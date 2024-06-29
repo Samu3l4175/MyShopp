@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myshopp/stories/list_stories.dart';
 
-// List<Widget> dummyStories() {
-//   List storiesList = [];
-//   for (int i = 0; i <= 10; i++) {
-//     storiesList.add(Stories());
-//   }
-//   return storiesList;
-// }
-
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -16,35 +8,88 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(color: Colors.white),
-      child: SafeArea(
-        child: Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                'MyShopp',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'MyShopp',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              label: 'Home',
+              icon: Icon(
+                Icons.home,
               ),
             ),
-            body: Scrollbar(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Scrollbar(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: dummyStories,
+            BottomNavigationBarItem(
+              label: 'Search',
+              icon: Icon(
+                Icons.search,
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Add',
+              icon: Icon(
+                Icons.add,
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Cart',
+              icon: Icon(
+                Icons.shopping_cart,
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Menu',
+              icon: Icon(
+                Icons.menu,
+              ),
+            ),
+          ],
+          type: BottomNavigationBarType.fixed,
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Scrollbar(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Scrollbar(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: dummyStories,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            bottomNavigationBar: Text('') //TODO,
-            ),
+                    child: const Text('Live'),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

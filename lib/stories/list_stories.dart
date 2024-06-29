@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:myshopp/stories/stories.dart';
 
 List<Widget> dummyStories = [
-  SizedBox(width: 15),
-  Stories(
+  const SizedBox(width: 15),
+  const Stories(
     name: 'Abdul',
     imageURL: 'assets/images/test.jpg',
   ),
-  SizedBox(width: 15),
-  Stories(
+  const SizedBox(width: 15),
+  const Stories(
     name: 'Abdul',
     imageURL: 'assets/images/test.jpg',
   ),
-  SizedBox(width: 15),
-  Stories(
+  const SizedBox(width: 15),
+  const Stories(
     name: 'Abdul',
     imageURL: 'assets/images/test.jpg',
   ),
-  SizedBox(width: 15),
-  Stories(
+  const SizedBox(width: 15),
+  const Stories(
     name: 'Abdul',
     imageURL: 'assets/images/test.jpg',
   ),
-  SizedBox(width: 15),
-  Stories(
+  const SizedBox(width: 15),
+  const Stories(
     name: 'Abdul',
     imageURL: 'assets/images/test.jpg',
   ),
