@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'package:myshopp/menubar_button.dart';
+import 'package:myshopp/search_bar.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -30,6 +31,43 @@ class Home extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          onTap: (index) {
+            switch (index) {
+              case 1:
+                showModalBottomSheet(
+                  context: context,
+                  builder: (builder) {
+                    return Container(
+                      height: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: const Column(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 50),
+                            child: SearchBarApp(),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+                break;
+              case 2:
+                print('secondo caso');
+                break;
+              case 3:
+                print('terzo caso');
+                break;
+              case 4:
+                print('quarto caso');
+                break;
+              default:
+                print('caso default');
+            }
+          },
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               label: 'Home',
