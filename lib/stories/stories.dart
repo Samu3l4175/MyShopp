@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myshopp/stories/list_story_pages.dart';
 import 'package:myshopp/stories/story_page.dart';
 
 class Stories extends StatelessWidget {
@@ -21,7 +22,7 @@ class Stories extends StatelessWidget {
           context,
           MaterialPageRoute<void>(
             builder: (BuildContext context) {
-              return 1;
+              return const ListStoryPages();
             },
           ),
         );

@@ -1,7 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'package:myshopp/menubar_button.dart';
-import 'package:myshopp/stories/story_page.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});

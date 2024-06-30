@@ -1,30 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:myshopp/stories/stories.dart';
+import 'package:myshopp/stories/story_page.dart';
 
 List<Widget> dummyStories = [
-  const SizedBox(width: 15),
   const Stories(
     name: 'Abdul',
     imageURL: 'assets/images/test.jpg',
+    stories: [
+      StoryPage(image: AssetImage('assets/images/test.jpg')),
+      StoryPage(image: AssetImage('assets/images/test.jpg')),
+    ],
   ),
-  const SizedBox(width: 15),
   const Stories(
-    name: 'Abdul',
+    name: '2Story',
     imageURL: 'assets/images/test.jpg',
-  ),
-  const SizedBox(width: 15),
-  const Stories(
-    name: 'Abdul',
-    imageURL: 'assets/images/test.jpg',
-  ),
-  const SizedBox(width: 15),
-  const Stories(
-    name: 'Abdul',
-    imageURL: 'assets/images/test.jpg',
-  ),
-  const SizedBox(width: 15),
-  const Stories(
-    name: 'Abdul',
-    imageURL: 'assets/images/test.jpg',
+    stories: [
+      StoryPage(image: AssetImage('assets/images/test.jpg')),
+      StoryPage(image: AssetImage('assets/images/test.jpg')),
+      StoryPage(image: AssetImage('assets/images/test.jpg')),
+      StoryPage(image: AssetImage('assets/images/test.jpg')),
+    ],
   ),
 ];
