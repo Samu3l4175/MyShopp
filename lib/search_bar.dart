@@ -1,43 +1,63 @@
 import 'package:flutter/material.dart';
 
-class SearchBarApp extends StatefulWidget {
-  const SearchBarApp({super.key});
+class CustomSearchDelegate extends SearchDelegate<String> {
+  final List<String> searchList = [];
+  //TODO
+  //add the merchandise list of products
 
   @override
-  State<SearchBarApp> createState() => _SearchBarAppState();
-}
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
 
-class _SearchBarAppState extends State<SearchBarApp> {
   @override
-  Widget build(BuildContext context) {
-    return SearchAnchor(
-      builder: (BuildContext ctx, SearchController controller) {
-        return SearchBar(
-          controller: controller,
-          padding: const MaterialStatePropertyAll<EdgeInsets>(
-              EdgeInsets.symmetric(horizontal: 16.0)),
-          // onTap: () {
-          //   controller.openView();
-          // },
-          // onChanged: (_) {
-          //   controller.openView();
-          // },
-          leading: const Icon(Icons.search),
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () => Navigator.of(context).pop(),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    final List<String> searchResults = searchList
+        .where((item) => item.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    return ListView.builder(
+      itemCount: searchResults.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(searchResults[index]),
+          onTap: () {
+            close(context, searchResults[index]);
+          },
         );
       },
-      suggestionsBuilder: (BuildContext context, SearchController controller) {
-        return List<ListTile>.generate(
-          5,
-          (int index) {
-            final String item = 'item $index';
-            return ListTile(
-              title: Text(item),
-              onTap: () {
-                setState(() {
-                  controller.closeView(item);
-                });
-              },
-            );
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final List<String> suggestionList = query.isEmpty
+        ? []
+        : searchList
+            .where((item) => item.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(suggestionList[index]),
+          onTap: () {
+            query = suggestionList[index];
           },
         );
       },

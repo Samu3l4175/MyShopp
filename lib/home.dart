@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:myshopp/reels_database.dart';
+import 'package:myshopp/reels_thumbernail.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'package:myshopp/menubar_button.dart';
 import 'package:myshopp/search_bar.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -34,25 +37,9 @@ class Home extends StatelessWidget {
           onTap: (index) {
             switch (index) {
               case 1:
-                showModalBottomSheet(
+                showSearch(
                   context: context,
-                  builder: (builder) {
-                    return Container(
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                      ),
-                      child: const Column(
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 50),
-                            child: SearchBarApp(),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                  delegate: CustomSearchDelegate(),
                 );
                 break;
               case 2:
@@ -68,32 +55,30 @@ class Home extends StatelessWidget {
                 print('caso default');
             }
           },
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
+          items: <BottomNavigationBarItem>[
+            const BottomNavigationBarItem(
               label: 'Home',
               icon: Icon(
                 Icons.home,
               ),
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               label: 'Search',
               icon: Icon(
                 Icons.search,
               ),
             ),
             BottomNavigationBarItem(
-              label: 'Add',
-              icon: Icon(
-                Icons.add,
-              ),
+              label: 'Live',
+              icon: Icon(MdiIcons.broadcast),
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               label: 'Cart',
               icon: Icon(
                 Icons.shopping_cart,
               ),
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               label: 'Menu',
               icon: Icon(
                 Icons.menu,
@@ -120,6 +105,13 @@ class Home extends StatelessWidget {
                   MenuButton(function: () {}, text: 'MarketPlace'),
                   MenuButton(function: () {}, text: 'Cupon'),
                 ],
+              ),
+              ListView.builder(
+                itemCount: database.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return database[index];
+                },
+                scrollDirection: Axis.horizontal,
               ),
             ],
           ),
