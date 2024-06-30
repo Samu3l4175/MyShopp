@@ -1,10 +1,20 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'package:myshopp/menubar_button.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
+
+  List<Widget> getStories() {
+    List<Widget> storiesCarousel = [];
+    for (var user in dummyStories) {
+      storiesCarousel.add(const SizedBox(
+        width: 15,
+      ));
+      storiesCarousel.add(user);
+    }
+    return storiesCarousel;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +70,7 @@ class Home extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: dummyStories,
+                  children: getStories(),
                 ),
               ),
               const SizedBox(height: 10),

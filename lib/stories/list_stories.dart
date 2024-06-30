@@ -7,18 +7,36 @@ List<Widget> dummyStories = [
     name: 'Abdul',
     imageURL: 'assets/images/test.jpg',
     stories: [
-      StoryPage(image: AssetImage('assets/images/test.jpg')),
-      StoryPage(image: AssetImage('assets/images/test.jpg')),
+      StoryPage(
+          image: AssetImage('assets/images/test.jpg'),
+          name: 'Abdul',
+          imageURL: 'assets/images/test.jpg'),
+      StoryPage(
+          image: AssetImage('assets/images/test.jpg'),
+          name: 'Abdul',
+          imageURL: 'assets/images/test.jpg'),
     ],
   ),
   const Stories(
     name: '2Story',
     imageURL: 'assets/images/test.jpg',
     stories: [
-      StoryPage(image: AssetImage('assets/images/test.jpg')),
-      StoryPage(image: AssetImage('assets/images/test.jpg')),
-      StoryPage(image: AssetImage('assets/images/test.jpg')),
-      StoryPage(image: AssetImage('assets/images/test.jpg')),
+      StoryPage(
+          image: AssetImage('assets/images/test.jpg'),
+          name: '2Story',
+          imageURL: 'assets/images/test.jpg'),
+      StoryPage(
+          image: AssetImage('assets/images/test.jpg'),
+          name: '2Story',
+          imageURL: 'assets/images/test.jpg'),
+      StoryPage(
+          image: AssetImage('assets/images/test.jpg'),
+          name: '2Story',
+          imageURL: 'assets/images/test.jpg'),
+      StoryPage(
+          image: AssetImage('assets/images/test.jpg'),
+          name: '2Story',
+          imageURL: 'assets/images/test.jpg'),
     ],
   ),
 ];

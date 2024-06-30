@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 
 class StoryPage extends StatefulWidget {
-  const StoryPage({super.key, required this.image});
+  const StoryPage({
+    super.key,
+    required this.image,
+    required this.name,
+    required this.imageURL,
+  });
 
   final ImageProvider<Object> image;
+  final String name;
+  final String imageURL;
 
   @override
   // ignore: no_logic_in_create_state
-  State<StoryPage> createState() => _StoryPageState(image);
+  State<StoryPage> createState() => _StoryPageState(image, name, imageURL);
 }
 
 class _StoryPageState extends State<StoryPage> {
-  _StoryPageState(this.image);
+  _StoryPageState(this.image, this.name, this.imageURL);
 
   final ImageProvider<Object> image;
+  final String name;
+  final String imageURL;
 
   String _actualIcon = 'icon';
 
@@ -41,6 +50,42 @@ class _StoryPageState extends State<StoryPage> {
                   fit: BoxFit.cover,
                   image: image,
                 ),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: AssetImage(imageURL),
+                          radius: 15,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          name,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            decoration: TextDecoration.none,
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: '', //TODO
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  TextButton.icon(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    ),
+                    label: const Text(''),
+                  )
+                ],
               ),
             ),
           ),

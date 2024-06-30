@@ -1,27 +1,34 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:myshopp/stories/list_stories.dart';
-import 'package:myshopp/stories/story_page.dart';
 
 class ListStoryPages extends StatelessWidget {
-  const ListStoryPages({super.key});
+  const ListStoryPages({
+    super.key,
+    required this.stories,
+  });
+
+  final List<Widget> stories;
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> getPages() {
-      dummyStories.first.toString()
-    }
-
     final controller = PageController(
-      initialPage: 1,
+      initialPage: 0,
     );
 
     return PageView(
       controller: controller,
-      children: const [
-        StoryPage(image: AssetImage('assets/images/test.jpg')),
-        StoryPage(image: AssetImage('assets/images/test.jpg')),
-        StoryPage(image: AssetImage('assets/images/test.jpg')),
-      ],
+      children: stories,
+      onPageChanged: (index) async {
+        if (index + 1 == stories.length) {
+          await controller.animateToPage(
+            stories.indexOf(stories.last),
+            duration: Durations.medium1,
+            curve: Curves.linear,
+          );
+          Navigator.pop(context);
+        }
+      },
     );
   }
 }
