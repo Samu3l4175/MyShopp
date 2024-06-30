@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class ListStoryPages extends StatelessWidget {
   const ListStoryPages({
@@ -19,14 +18,12 @@ class ListStoryPages extends StatelessWidget {
     return PageView(
       controller: controller,
       children: stories,
-      onPageChanged: (index) async {
+      onPageChanged: (index) {
         if (index + 1 == stories.length) {
-          await controller.animateToPage(
-            stories.indexOf(stories.last),
-            duration: Durations.medium1,
-            curve: Curves.linear,
-          );
-          Navigator.pop(context);
+          controller;
+          Timer(const Duration(seconds: 3), () {
+            Navigator.pop(context);
+          });
         }
       },
     );
