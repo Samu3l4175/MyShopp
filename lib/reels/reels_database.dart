@@ -19,6 +19,30 @@ List<ReelsThumbernail> database = [
     thumbernailImage:
         AssetImage('assets/images/test${getRandomInt().toString()}.jpg'),
     title: 'Prova',
-    price: getRandomDouble().toString(),
+    price: getRandomDouble().toStringAsFixed(2),
+  ),
+  ReelsThumbernail(
+    thumbernailImage:
+        AssetImage('assets/images/test${getRandomInt().toString()}.jpg'),
+    title: 'Prova',
+    price: getRandomDouble().toStringAsFixed(2),
+  ),
+  ReelsThumbernail(
+    thumbernailImage:
+        AssetImage('assets/images/test${getRandomInt().toString()}.jpg'),
+    title: 'Prova',
+    price: getRandomDouble().toStringAsFixed(2),
+  ),
+  ReelsThumbernail(
+    thumbernailImage:
+        AssetImage('assets/images/test${getRandomInt().toString()}.jpg'),
+    title: 'Prova',
+    price: getRandomDouble().toStringAsFixed(2),
+  ),
+  ReelsThumbernail(
+    thumbernailImage:
+        AssetImage('assets/images/test${getRandomInt().toString()}.jpg'),
+    title: 'Prova',
+    price: getRandomDouble().toStringAsFixed(2),
   ),
 ];

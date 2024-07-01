@@ -1,20 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:myshopp/stories/list_story_pages.dart';
+import 'package:myshopp/stories/story_page.dart';
 
 class Stories extends StatelessWidget {
   const Stories({
     super.key,
     required this.name,
-    required this.imageURL,
-    required this.stories,
+    required this.thumbernail,
+    required this.listStoryImages,
   });
 
-  final String imageURL;
+  final ImageProvider<Object> thumbernail;
   final String name;
-  final List<Widget> stories;
+  final List<ImageProvider<Object>> listStoryImages;
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> stories = [];
+
+    List<Widget> getStories() {
+      for (var image in listStoryImages) {
+        stories.add(StoryPage(
+          imageStory: image,
+          name: name,
+          thumbernail: thumbernail,
+        ));
+      }
+      return stories;
+    }
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -22,7 +36,9 @@ class Stories extends StatelessWidget {
           MaterialPageRoute<void>(
             builder: (BuildContext context) {
               return ListStoryPages(
-                stories: stories,
+                name: name,
+                thumbernail: thumbernail,
+                stories: getStories(),
               );
             },
           ),
@@ -54,7 +70,7 @@ class Stories extends StatelessWidget {
                   // set this edge to change the distance of the border from the photo
                   padding: const EdgeInsets.all(3.0),
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(imageURL),
+                    backgroundImage: thumbernail,
                     radius: 35,
                   ),
                 ),

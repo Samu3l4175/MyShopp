@@ -3,26 +3,30 @@ import 'package:flutter/material.dart';
 class StoryPage extends StatefulWidget {
   const StoryPage({
     super.key,
-    required this.image,
+    required this.imageStory,
     required this.name,
-    required this.imageURL,
+    required this.thumbernail,
   });
 
-  final ImageProvider<Object> image;
+  final ImageProvider<Object> imageStory;
+  final ImageProvider<Object> thumbernail;
   final String name;
-  final String imageURL;
 
   @override
   // ignore: no_logic_in_create_state
-  State<StoryPage> createState() => _StoryPageState(image, name, imageURL);
+  State<StoryPage> createState() => _StoryPageState(
+        imageStory,
+        name,
+        thumbernail,
+      );
 }
 
 class _StoryPageState extends State<StoryPage> {
-  _StoryPageState(this.image, this.name, this.imageURL);
+  _StoryPageState(this.imageStory, this.name, this.thumbernail);
 
-  final ImageProvider<Object> image;
+  final ImageProvider<Object> thumbernail;
   final String name;
-  final String imageURL;
+  final ImageProvider<Object> imageStory;
 
   String _actualIcon = 'icon';
 
@@ -48,7 +52,7 @@ class _StoryPageState extends State<StoryPage> {
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: image,
+                  image: imageStory,
                 ),
               ),
               child: Row(
@@ -60,7 +64,7 @@ class _StoryPageState extends State<StoryPage> {
                     child: Row(
                       children: [
                         CircleAvatar(
-                          backgroundImage: AssetImage(imageURL),
+                          backgroundImage: thumbernail,
                           radius: 15,
                         ),
                         const SizedBox(width: 10),

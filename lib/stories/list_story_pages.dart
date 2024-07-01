@@ -5,8 +5,12 @@ class ListStoryPages extends StatelessWidget {
   const ListStoryPages({
     super.key,
     required this.stories,
+    required this.name,
+    required this.thumbernail,
   });
 
+  final String name;
+  final ImageProvider<Object> thumbernail;
   final List<Widget> stories;
 
   @override

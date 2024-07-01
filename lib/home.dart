@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:myshopp/reels/reels_database.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'package:myshopp/menubar_button.dart';
 import 'package:myshopp/search_bar.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'dart:math' as math;
+
+int getRandomInt() {
+  return math.Random().nextInt(10) + 1;
+}
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   List<Widget> getStories() {
     List<Widget> storiesCarousel = [];
-    for (var user in dummyStories) {
+    for (var user in getRandomNumberOfStoriesThumbernail()) {
       storiesCarousel.add(const SizedBox(
         width: 15,
       ));
@@ -107,13 +111,15 @@ class Home extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
+              SizedBox(
                   height: 120,
                   width: double.infinity,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Image(image: AssetImage('assets/images/test.jpg')),
+                      Image(
+                          image: AssetImage(
+                              'assets/images/test${getRandomInt().toString()}.jpg')),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
