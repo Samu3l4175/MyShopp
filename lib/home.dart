@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myshopp/reels_database.dart';
-import 'package:myshopp/reels_thumbernail.dart';
+import 'package:flutter/widgets.dart';
+import 'package:myshopp/reels/reels_database.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'package:myshopp/menubar_button.dart';
 import 'package:myshopp/search_bar.dart';
@@ -22,17 +22,13 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const TextStyle kTextStyleReminder = TextStyle(
+      fontSize: 15,
+    );
+
     return Container(
       decoration: const BoxDecoration(color: Colors.white),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'MyShopp',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (index) {
             switch (index) {
@@ -89,30 +85,85 @@ class Home extends StatelessWidget {
         ),
         body: SafeArea(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: getStories(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Column(
                 children: [
-                  MenuButton(function: () {}, text: 'Live'),
-                  MenuButton(function: () {}, text: 'Reels'),
-                  MenuButton(function: () {}, text: 'MarketPlace'),
-                  MenuButton(function: () {}, text: 'Cupon'),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: getStories(),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MenuButton(function: () {}, text: 'Live'),
+                      MenuButton(function: () {}, text: 'Reels'),
+                      MenuButton(function: () {}, text: 'MarketPlace'),
+                      MenuButton(function: () {}, text: 'Cupon'),
+                    ],
+                  ),
                 ],
               ),
-              ListView.builder(
-                itemCount: database.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return database[index];
-                },
-                scrollDirection: Axis.horizontal,
-              ),
+              Container(
+                  height: 120,
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Image(image: AssetImage('assets/images/test.jpg')),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'title programmed live',
+                                style: kTextStyleReminder,
+                              ),
+                              Text(
+                                'date and time of programmed live',
+                                style: kTextStyleReminder,
+                              ),
+                            ],
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'Remember me',
+                              style: kTextStyleReminder,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  )),
+              Column(
+                children: [
+                  const Text(
+                    'Reels Shop',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    height: 350,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: database[index],
+                        );
+                      },
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         ),

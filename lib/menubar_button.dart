@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//STYLING BUTTONS ON TOP OF THE PAGE E.G. LIVE, REELS, MARKETPLACE, COUPON
+
 class MenuButton extends StatelessWidget {
   const MenuButton({super.key, required this.function, required this.text});
 

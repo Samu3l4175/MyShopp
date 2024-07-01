@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//CUSTOM CLASS FOR SEARCH BAR
+
 class CustomSearchDelegate extends SearchDelegate<String> {
   final List<String> searchList = [];
   //TODO
@@ -9,7 +11,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';
         },
