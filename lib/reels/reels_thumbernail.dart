@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myshopp/reels/reels_page.dart';
 
 //STYLING FOR THE REELS THUMBERNAIL
 
@@ -24,46 +25,58 @@ class ReelsThumbernail extends StatelessWidget {
 
     const Radius kRadius = Radius.circular(10);
 
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.grey[300],
-          borderRadius: const BorderRadius.all(kRadius)),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 8,
-            child: Container(
-              height: double.infinity,
-              width: 250,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: kRadius,
-                  topRight: kRadius,
-                ),
-                image: DecorationImage(
-                  image: thumbernailImage,
-                  fit: BoxFit.cover,
+    return GestureDetector(
+      // onTap: () {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute<void>(
+      //       builder: (BuildContext context) {
+      //         return ReelsPage();
+      //       },
+      //     ),
+      //   );
+      // },
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: const BorderRadius.all(kRadius)),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 8,
+              child: Container(
+                height: double.infinity,
+                width: 250,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: kRadius,
+                    topRight: kRadius,
+                  ),
+                  image: DecorationImage(
+                    image: thumbernailImage,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: kTextStyle,
-                ),
-                Text(
-                  '\$ $price',
-                  style: kTextStyle.copyWith(fontWeight: FontWeight.normal),
-                ),
-              ],
-            ),
-          )
-        ],
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: kTextStyle,
+                  ),
+                  Text(
+                    '\$ $price',
+                    style: kTextStyle.copyWith(fontWeight: FontWeight.normal),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -50,7 +50,9 @@ class CustomSearchDelegate extends SearchDelegate<String> {
     final List<String> suggestionList = query.isEmpty
         ? []
         : searchList
-            .where((item) => item.toLowerCase().contains(query.toLowerCase()))
+            .where(
+              (item) => item.toLowerCase().contains(query.toLowerCase()),
+            )
             .toList();
 
     return ListView.builder(

@@ -89,7 +89,7 @@ class Stories extends StatelessWidget {
                   fontSize: 10,
                   overflow: TextOverflow.ellipsis,
                   fontWeight: FontWeight.normal,
-                  fontFamily: '' //TODO,
+                  fontFamily: 'Montag W01' //TODO,
                   ),
             ),
           ),

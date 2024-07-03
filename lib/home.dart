@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:myshopp/reels/reels_database.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'package:myshopp/menubar_button.dart';
@@ -100,18 +101,50 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      MenuButton(function: () {}, text: 'Live'),
-                      MenuButton(function: () {}, text: 'Reels'),
-                      MenuButton(function: () {}, text: 'MarketPlace'),
-                      MenuButton(function: () {}, text: 'Cupon'),
-                    ],
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
+                      child: SearchAnchor(builder:
+                          (BuildContext context, SearchController controller) {
+                        return SearchBar(
+                          controller: controller,
+                          padding: const MaterialStatePropertyAll(
+                            EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 0,
+                            ),
+                          ),
+                          leading: const Icon(Icons.search),
+                          onTap: () => controller.openView(),
+                          onChanged: (_) => controller.openView(),
+                        );
+                      }, suggestionsBuilder:
+                          (BuildContext context, SearchController controller) {
+                        //TODO aggiusta la search bar suggestion
+                        return List<ListTile>.generate(5, (index) {
+                          return ListTile(
+                            title: Text('prova $index'),
+                            onTap: () {
+                              controller.closeView('prova');
+                            },
+                          );
+                        });
+                      }))
                 ],
               ),
-              SizedBox(
+              Container(
+                  margin: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 1.0), //(x,y)
+                        blurRadius: 6.0,
+                      ),
+                    ],
+                  ),
                   height: 120,
                   width: double.infinity,
                   child: Row(

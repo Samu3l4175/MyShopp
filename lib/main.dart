@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 void main(List<String> args) {
   runApp(
-    const MaterialApp(
-      home: Home(),
+    MaterialApp(
+      home: const Home(),
+      theme: ThemeData().copyWith(primaryColor: Colors.red),
     ),
   );
 }

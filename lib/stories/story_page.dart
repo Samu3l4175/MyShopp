@@ -75,7 +75,7 @@ class _StoryPageState extends State<StoryPage> {
                             decoration: TextDecoration.none,
                             color: Colors.white,
                             fontWeight: FontWeight.normal,
-                            fontFamily: '', //TODO
+                            fontFamily: '', //TODO choose the font
                           ),
                         ),
                       ],

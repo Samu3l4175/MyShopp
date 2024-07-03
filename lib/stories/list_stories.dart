@@ -29,7 +29,7 @@ List<Widget> getRandomNumberOfStoriesThumbernail() {
         name: 'Abdul',
         thumbernail:
             AssetImage('assets/images/test${getRandomInt().toString()}.jpg'),
-        listStoryImages: randomStories,
+        listStoryImages: getRandomNumberOfStories(),
       ),
     );
   }
