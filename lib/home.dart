@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:myshopp/reels/reels_database.dart';
 import 'package:myshopp/stories/list_stories.dart';
-import 'package:myshopp/menubar_button.dart';
-import 'package:myshopp/search_bar.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:math' as math;
 
 int getRandomInt() {
   return math.Random().nextInt(10) + 1;
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   List<Widget> getStories() {
     List<Widget> storiesCarousel = [];
     for (var user in getRandomNumberOfStoriesThumbernail()) {
@@ -27,6 +28,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
+
     const TextStyle kTextStyleReminder = TextStyle(
       fontSize: 15,
     );
@@ -38,101 +41,68 @@ class Home extends StatelessWidget {
           onTap: (index) {
             switch (index) {
               case 1:
-                showSearch(
-                  context: context,
-                  delegate: CustomSearchDelegate(),
-                );
+                debugPrint('primo caso');
                 break;
               case 2:
-                print('secondo caso');
-                break;
-              case 3:
-                print('terzo caso');
-                break;
-              case 4:
-                print('quarto caso');
+                debugPrint('secondo caso');
                 break;
               default:
-                print('caso default');
+                scrollController.jumpTo(0.0);
             }
           },
-          items: <BottomNavigationBarItem>[
-            const BottomNavigationBarItem(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
               label: 'Home',
               icon: Icon(
                 Icons.home,
               ),
             ),
-            const BottomNavigationBarItem(
-              label: 'Search',
-              icon: Icon(
-                Icons.search,
-              ),
+            BottomNavigationBarItem(
+              label: 'Cars',
+              icon: Icon(Icons.directions_car_filled),
             ),
             BottomNavigationBarItem(
-              label: 'Live',
-              icon: Icon(MdiIcons.broadcast),
-            ),
-            const BottomNavigationBarItem(
-              label: 'Cart',
+              label: 'Liked',
               icon: Icon(
-                Icons.shopping_cart,
-              ),
-            ),
-            const BottomNavigationBarItem(
-              label: 'Menu',
-              icon: Icon(
-                Icons.menu,
+                Icons.favorite,
               ),
             ),
           ],
           type: BottomNavigationBarType.fixed,
         ),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        appBar: AppBar(
+          title: const Column(
             children: [
-              Column(
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: getStories(),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
-                      child: SearchAnchor(builder:
-                          (BuildContext context, SearchController controller) {
-                        return SearchBar(
-                          controller: controller,
-                          padding: const MaterialStatePropertyAll(
-                            EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 0,
-                            ),
-                          ),
-                          leading: const Icon(Icons.search),
-                          onTap: () => controller.openView(),
-                          onChanged: (_) => controller.openView(),
-                        );
-                      }, suggestionsBuilder:
-                          (BuildContext context, SearchController controller) {
-                        //TODO aggiusta la search bar suggestion
-                        return List<ListTile>.generate(5, (index) {
-                          return ListTile(
-                            title: Text('prova $index'),
-                            onTap: () {
-                              controller.closeView('prova');
-                            },
-                          );
-                        });
-                      }))
-                ],
+              Text(
+                '24 hours of Le Mans',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
               ),
-              Container(
+              Text(
+                '12/06/2024 - 16/06/2024',
+                style: TextStyle(color: Colors.black, fontSize: 20),
+              ),
+            ],
+          ),
+        ),
+        body: SingleChildScrollView(
+          controller: scrollController,
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(height: 20),
+                // Column(
+                //   children: [
+                //     SingleChildScrollView(
+                //       scrollDirection: Axis.horizontal,
+                //       child: Row(
+                //         children: getStories(),
+                //       ),
+                //     ),
+                //     const SizedBox(height: 10),
+                //   ],
+                // ),
+                Container(
                   margin: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -147,63 +117,81 @@ class Home extends StatelessWidget {
                   ),
                   height: 120,
                   width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Image(
-                          image: AssetImage(
-                              'assets/images/test${getRandomInt().toString()}.jpg')),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'title programmed live',
-                                style: kTextStyleReminder,
-                              ),
-                              Text(
-                                'date and time of programmed live',
-                                style: kTextStyleReminder,
-                              ),
-                            ],
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Remember me',
-                              style: kTextStyleReminder,
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  )),
-              Column(
-                children: [
-                  const Text(
-                    'Reels Shop',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    height: 350,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: database[index],
-                        );
-                      },
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://www.lemans.org/media/cache/api_news_large/assets/fileuploads/65/48/6548a560dc608.jpg',
+                        ),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.bottomLeft,
+                      ),
                     ),
-                  )
-                ],
-              )
-            ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: SearchAnchor(
+                    builder:
+                        (BuildContext context, SearchController controller) {
+                      return SearchBar(
+                        controller: controller,
+                        padding: const MaterialStatePropertyAll(
+                          EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 0,
+                          ),
+                        ),
+                        leading: const Icon(Icons.search),
+                        onTap: () => controller.openView(),
+                        onChanged: (_) => controller.openView(),
+                      );
+                    },
+                    suggestionsBuilder:
+                        (BuildContext context, SearchController controller) {
+                      //TODO aggiusta la search bar suggestion
+                      return List<ListTile>.generate(
+                        5,
+                        (index) {
+                          final String selectedItem = 'prova $index';
+                          return ListTile(
+                            title: Text(selectedItem),
+                            onTap: () {
+                              controller.closeView(selectedItem);
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+                Column(
+                  children: [
+                    const Text(
+                      'Cars Carousel',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      height: 350,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: database[index],
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

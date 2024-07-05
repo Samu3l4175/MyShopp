@@ -1,21 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:myshopp/reels/reels_page.dart';
 
 //STYLING FOR THE REELS THUMBERNAIL
 
-class ReelsThumbernail extends StatelessWidget {
+class ReelsThumbernail extends StatefulWidget {
   const ReelsThumbernail({
     super.key,
     required this.thumbernailImage,
     required this.title,
-    required this.price,
   });
 
   final ImageProvider<Object> thumbernailImage;
   final String title;
-  final String price;
 
   @override
+  State<ReelsThumbernail> createState() =>
+      // ignore: no_logic_in_create_state
+      _ReelsThumbernailState(thumbernailImage: thumbernailImage, title: title);
+}
+
+class _ReelsThumbernailState extends State<ReelsThumbernail> {
+  _ReelsThumbernailState({required this.thumbernailImage, required this.title});
+
+  final ImageProvider<Object> thumbernailImage;
+  final String title;
+
+  String _actualIcon = 'icon';
+
+  final Widget _icon = const Icon(
+    Icons.favorite_border,
+    color: Colors.white,
+  );
+
+  final Widget _iconfilled = const Icon(
+    Icons.favorite,
+    color: Colors.red,
+  );
+
   Widget build(BuildContext context) {
     const TextStyle kTextStyle = TextStyle(
       fontSize: 16,
@@ -26,16 +46,6 @@ class ReelsThumbernail extends StatelessWidget {
     const Radius kRadius = Radius.circular(10);
 
     return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute<void>(
-      //       builder: (BuildContext context) {
-      //         return ReelsPage();
-      //       },
-      //     ),
-      //   );
-      // },
       child: Container(
         decoration: BoxDecoration(
             color: Colors.grey[300],
@@ -61,17 +71,24 @@ class ReelsThumbernail extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
                     title,
                     style: kTextStyle,
                   ),
-                  Text(
-                    '\$ $price',
-                    style: kTextStyle.copyWith(fontWeight: FontWeight.normal),
-                  ),
+                  IconButton(
+                    icon: _actualIcon != 'icon' ? _iconfilled : _icon,
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      setState(() {
+                        _actualIcon == 'icon'
+                            ? _actualIcon = 'filledIcon'
+                            : _actualIcon = 'icon';
+                      });
+                    },
+                  )
                 ],
               ),
             )
