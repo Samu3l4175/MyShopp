@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'dart:math' as math;
+import 'package:myshopp/cars_catalog.dart';
 
 int getRandomInt() {
   return math.Random().nextInt(10) + 1;
@@ -25,16 +26,33 @@ class _HomeState extends State<Home> {
     return storiesCarousel;
   }
 
+  TextStyle kTextStyle = const TextStyle(fontSize: 20);
+
   Set<String> _selected = {'Hypercar'};
   List<Widget> _selectedWidget = [];
 
   List<Widget> getTop() {
     if (_selected.toString() == '{Hypercar}') {
-      _selectedWidget = _topHyper.map((e) => Text(e)).toList();
+      _selectedWidget = _topHyper
+          .map((e) => Text(
+                e,
+                style: kTextStyle,
+              ))
+          .toList();
     } else if (_selected.toString() == '{LMP2}') {
-      _selectedWidget = _topLMP2.map((e) => Text(e)).toList();
+      _selectedWidget = _topLMP2
+          .map((e) => Text(
+                e,
+                style: kTextStyle,
+              ))
+          .toList();
     } else {
-      _selectedWidget = _topLMGT3.map((e) => Text(e)).toList();
+      _selectedWidget = _topLMGT3
+          .map((e) => Text(
+                e,
+                style: kTextStyle,
+              ))
+          .toList();
     }
     return _selectedWidget;
   }
@@ -53,29 +71,29 @@ class _HomeState extends State<Home> {
   ];
 
   final List<String> _topLMP2 = [
-    '50 - Ferrari AF Corse',
-    '7 - Toyota Gazoo Racing',
-    '51 - Ferrari AF Corse',
-    '6 - Porsche Penske Motorsport',
-    '8 - Toyota Gazoo Racing',
-    '5 - Porsche Penske Motorsport',
-    '2 - Cadillac Racing',
-    '12 - Hertz Team JOTA',
-    '38 - Hertz Team JOTA',
-    '63 - Lamborghini Iron Lynx',
+    '22 - United Autosports',
+    '34 - Inter Europol Competition',
+    '28 - IDEC Sport',
+    '183 - AF Corse',
+    '10 - Vector Sport',
+    '14 - AO by TF',
+    '33 - DKR Engineering',
+    '25 - Algarve Pro Racing',
+    '65 - Panis Racing',
+    '47 - COOL Racing',
   ];
 
   final List<String> _topLMGT3 = [
-    '50 - Ferrari AF Corse',
-    '7 - Toyota Gazoo Racing',
-    '51 - Ferrari AF Corse',
-    '6 - Porsche Penske Motorsport',
-    '8 - Toyota Gazoo Racing',
-    '5 - Porsche Penske Motorsport',
-    '2 - Cadillac Racing',
-    '12 - Hertz Team JOTA',
-    '38 - Hertz Team JOTA',
-    '63 - Lamborghini Iron Lynx',
+    '91 - Manthey EMA',
+    '31 - Team WRT',
+    '88 - Proton Competition',
+    '44 - Proton Competition',
+    '85 - Iron Dames',
+    '55 - Vista AF Corse',
+    '78 - Akkodis ASP Team',
+    '155 - Spirit of Race',
+    '777 - D\'Station Racing',
+    '87 - Akkodis ASP Team',
   ];
 
   @override
@@ -85,7 +103,6 @@ class _HomeState extends State<Home> {
     void updateSelected(Set<String> newSelection) {
       setState(() {
         _selected = newSelection;
-        getTop();
       });
     }
 
@@ -96,7 +113,14 @@ class _HomeState extends State<Home> {
           onTap: (index) {
             switch (index) {
               case 1:
-                debugPrint('primo caso');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) {
+                      return const CarsCatalog();
+                    },
+                  ),
+                );
                 break;
               case 2:
                 debugPrint('secondo caso');
@@ -147,44 +171,6 @@ class _HomeState extends State<Home> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(height: 20),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  child: SearchAnchor(
-                    builder:
-                        (BuildContext context, SearchController controller) {
-                      return SearchBar(
-                        controller: controller,
-                        padding: const MaterialStatePropertyAll(
-                          EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 0,
-                          ),
-                        ),
-                        leading: const Icon(Icons.search),
-                        onTap: () => controller.openView(),
-                        onChanged: (_) => controller.openView(),
-                      );
-                    },
-                    suggestionsBuilder:
-                        (BuildContext context, SearchController controller) {
-                      //TODO aggiusta la search bar suggestion
-                      return List<ListTile>.generate(
-                        5,
-                        (index) {
-                          final String selectedItem = 'prova $index';
-                          return ListTile(
-                            title: Text(selectedItem),
-                            onTap: () {
-                              controller.closeView(selectedItem);
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
                 const SizedBox(height: 20),
                 Column(
                   children: [
@@ -253,7 +239,8 @@ class _HomeState extends State<Home> {
                     ),
                     const SizedBox(height: 10),
                     Column(
-                      children: _selectedWidget,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: getTop(),
                     ),
 
                     // SizedBox(
