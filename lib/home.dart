@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myshopp/reels/reels_database.dart';
 import 'package:myshopp/stories/list_stories.dart';
 import 'dart:math' as math;
 
@@ -26,13 +25,69 @@ class _HomeState extends State<Home> {
     return storiesCarousel;
   }
 
+  Set<String> _selected = {'Hypercar'};
+  List<Widget> _selectedWidget = [];
+
+  List<Widget> getTop() {
+    if (_selected.toString() == '{Hypercar}') {
+      _selectedWidget = _topHyper.map((e) => Text(e)).toList();
+    } else if (_selected.toString() == '{LMP2}') {
+      _selectedWidget = _topLMP2.map((e) => Text(e)).toList();
+    } else {
+      _selectedWidget = _topLMGT3.map((e) => Text(e)).toList();
+    }
+    return _selectedWidget;
+  }
+
+  final List<String> _topHyper = [
+    '50 - Ferrari AF Corse',
+    '7 - Toyota Gazoo Racing',
+    '51 - Ferrari AF Corse',
+    '6 - Porsche Penske Motorsport',
+    '8 - Toyota Gazoo Racing',
+    '5 - Porsche Penske Motorsport',
+    '2 - Cadillac Racing',
+    '12 - Hertz Team JOTA',
+    '38 - Hertz Team JOTA',
+    '63 - Lamborghini Iron Lynx',
+  ];
+
+  final List<String> _topLMP2 = [
+    '50 - Ferrari AF Corse',
+    '7 - Toyota Gazoo Racing',
+    '51 - Ferrari AF Corse',
+    '6 - Porsche Penske Motorsport',
+    '8 - Toyota Gazoo Racing',
+    '5 - Porsche Penske Motorsport',
+    '2 - Cadillac Racing',
+    '12 - Hertz Team JOTA',
+    '38 - Hertz Team JOTA',
+    '63 - Lamborghini Iron Lynx',
+  ];
+
+  final List<String> _topLMGT3 = [
+    '50 - Ferrari AF Corse',
+    '7 - Toyota Gazoo Racing',
+    '51 - Ferrari AF Corse',
+    '6 - Porsche Penske Motorsport',
+    '8 - Toyota Gazoo Racing',
+    '5 - Porsche Penske Motorsport',
+    '2 - Cadillac Racing',
+    '12 - Hertz Team JOTA',
+    '38 - Hertz Team JOTA',
+    '63 - Lamborghini Iron Lynx',
+  ];
+
   @override
   Widget build(BuildContext context) {
     ScrollController scrollController = ScrollController();
 
-    const TextStyle kTextStyleReminder = TextStyle(
-      fontSize: 15,
-    );
+    void updateSelected(Set<String> newSelection) {
+      setState(() {
+        _selected = newSelection;
+        getTop();
+      });
+    }
 
     return Container(
       decoration: const BoxDecoration(color: Colors.white),
@@ -71,6 +126,8 @@ class _HomeState extends State<Home> {
           type: BottomNavigationBarType.fixed,
         ),
         appBar: AppBar(
+          toolbarHeight: 90.0,
+          surfaceTintColor: Colors.grey[100],
           title: const Column(
             children: [
               Text(
@@ -91,45 +148,6 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(height: 20),
-                // Column(
-                //   children: [
-                //     SingleChildScrollView(
-                //       scrollDirection: Axis.horizontal,
-                //       child: Row(
-                //         children: getStories(),
-                //       ),
-                //     ),
-                //     const SizedBox(height: 10),
-                //   ],
-                // ),
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(0.0, 1.0), //(x,y)
-                        blurRadius: 6.0,
-                      ),
-                    ],
-                  ),
-                  height: 120,
-                  width: double.infinity,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          'https://www.lemans.org/media/cache/api_news_large/assets/fileuploads/65/48/6548a560dc608.jpg',
-                        ),
-                        fit: BoxFit.cover,
-                        alignment: Alignment.bottomLeft,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -167,27 +185,91 @@ class _HomeState extends State<Home> {
                     },
                   ),
                 ),
+                const SizedBox(height: 20),
+                Column(
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: getStories(),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 1.0), //(x,y)
+                        blurRadius: 6.0,
+                      ),
+                    ],
+                  ),
+                  height: 120,
+                  width: double.infinity,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://www.lemans.org/media/cache/api_news_large/assets/fileuploads/65/48/6548a560dc608.jpg',
+                        ),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.bottomLeft,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
                 Column(
                   children: [
                     const Text(
-                      'Cars Carousel',
+                      'Results of the race',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                     ),
-                    SizedBox(
-                      height: 350,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: database[index],
-                          );
-                        },
+                    const SizedBox(height: 10),
+                    SegmentedButton(
+                      style: const ButtonStyle(
+                        visualDensity: VisualDensity(
+                          horizontal: 4,
+                          vertical: -3,
+                        ),
                       ),
-                    )
+                      showSelectedIcon: false,
+                      segments: const [
+                        ButtonSegment(
+                            value: 'Hypercar', label: Text('Hypercar')),
+                        ButtonSegment(value: 'LMP2', label: Text('LMP2')),
+                        ButtonSegment(value: 'LMGT3', label: Text('LMGT3'))
+                      ],
+                      selected: _selected,
+                      onSelectionChanged: updateSelected,
+                    ),
+                    const SizedBox(height: 10),
+                    Column(
+                      children: _selectedWidget,
+                    ),
+
+                    // SizedBox(
+                    //   height: 350,
+                    //   child: ListView.builder(
+                    //     scrollDirection: Axis.horizontal,
+                    //     shrinkWrap: true,
+                    //     itemCount: 5,
+                    //     itemBuilder: (context, index) {
+                    //       return Padding(
+                    //         padding: const EdgeInsets.all(10.0),
+                    //         child: database[index],
+                    //       );
+                    //     },
+                    //   ),
+                    // )
                   ],
                 )
               ],
